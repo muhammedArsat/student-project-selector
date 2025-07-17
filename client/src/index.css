@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body.dark {
+  background: #181818;
+  color: white;
+  transition: all 0.5;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 30px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-color: #ccc #0000;
+  animation: l16 1s infinite linear;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+}
+.loader::before {
+  border-color: #f03355 #0000;
+  animation: inherit;
+  animation-duration: 0.5s;
+  animation-direction: reverse;
+}
+.loader::after {
+  margin: 8px;
+}
+@keyframes l16 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@layer components {
+  .input-base {
+    @apply border px-4 py-2 rounded-lg w-full  dark:border-gray-600 bg-transparent outline-none border-gray-400 disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed dark:disabled:bg-dark-bg dark:disabled:text-gray-600;
+  }
+  .button-base {
+ @apply bg-blue-500 text-white font-lexend text-body w-full sm:w-fit rounded-lg py-2 active:bg-blue-400 text-center px-3;
+
+  }
+  .table-base {
+    @apply border border-collapse
+  }
+  .table-Row{
+    @apply p-2
+  }
+}

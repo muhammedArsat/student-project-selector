@@ -9,14 +9,20 @@ const Home = () => {
   const handleSoftware = () => {
     if (role === "ADMIN") {
       navigate("/new-software");
+    }else{
+      navigate('/register-software')
     }
   };
 
   const handleHardware = () => {
     if (role === "ADMIN") {
       navigate("/new-hardware");
+    }else{
+      navigate('/register-hardware')
     }
   };
+
+  
 
   return (
     <div className="flex flex-col sm:flex-row gap-3 px-2 sm:px-0">

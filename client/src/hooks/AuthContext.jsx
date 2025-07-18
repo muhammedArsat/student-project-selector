@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await fetchGetMe();
-
+     
       setAuth({
         email: res.email,
         role: res.role,
@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
         id:res.id,
         name: res.name,
       });
+    
     } catch (err) {
       setAuth({
         email: null,
@@ -40,6 +41,8 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
+
+
   return (
     <AuthContext.Provider value={{ ...auth, setAuth, loading, fetchUser }}>
       {children}

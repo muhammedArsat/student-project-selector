@@ -1,18 +1,30 @@
 import React, { useContext, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
+import { FaUserGraduate, FaChalkboardTeacher } from "react-icons/fa";
+import { AiFillHome } from "react-icons/ai";
+import { IoMdMail } from "react-icons/io";
+import { MdDashboard } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
 import ThemeContext from "../hooks/ThemeContext";
 import { logout } from "../apis/AuthApis";
 import AuthContext from "../hooks/AuthContext";
+import { FiSun, FiMoon } from "react-icons/fi";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FiChevronLeft } from "react-icons/fi";
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { fetchUser, role, id } = useContext(AuthContext);
   const { isDark, toggleTheme } = useContext(ThemeContext);
+  const [isShrink, setIsShrink] = useState(false);
   const location = useLocation();
   const pathname = location.pathname;
   const navigate = useNavigate();
   const handleMobileBar = () => {
     setIsMobileOpen((prev) => !prev);
+  };
+
+  const toggleShrink = () => {
+    setIsShrink((prev) => !prev);
   };
 
   const handleLogout = async () => {
@@ -32,8 +44,20 @@ const Navbar = () => {
     navigate(`/${path}`);
   };
   return (
-    <nav className="flex sm:flex-col flex-row p-3 justify-between sm:justify-start items-center z-50 relative sm:min-h-screen shadow-soft  dark:shadow-darkSoft gap-2 dark:bg-[#212529] transition-all duration-500">
-      <h1 className="font-lexend text-subheading">Project Selector</h1>
+    <nav
+      className={`flex sm:flex-col flex-row p-3 justify-between sm:justify-start items-center z-50 relative sm:min-h-screen shadow-soft  dark:shadow-darkSoft gap-2 dark:bg-[#212529] transition-all duration-500  ${
+        isShrink ? "sm:w-[75px]" : "sm:w-[250px]"
+      }`}
+    >
+      <h1 className="font-lexend text-subheading flex justify-start items-center gap-1">
+        {!isShrink && " Project Selector"}
+        <FiChevronLeft
+          onClick={toggleShrink}
+          className={`transition-all duration-300 ${
+            isShrink ? "rotate-180" : ""
+          }`}
+        />
+      </h1>
 
       <span className="cursor-pointer block sm:hidden">
         <CiMenuBurger size={26} onClick={handleMobileBar} />
@@ -41,70 +65,98 @@ const Navbar = () => {
 
       <ul className="sm:flex flex-col font-lexend text-body w-full hidden">
         <li
-          className={`px-2 py-4 text-center cursor-pointer ${
-            pathname === "/home" ? "bg-blue-500 text-white rounded-lg" : ""
-          }`}
+          className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
+      ${pathname === "/home" ? "bg-blue-500 text-white rounded-lg" : ""}
+      ${isShrink ? "justify-center" : "justify-start"}
+    `}
           onClick={() => handleRoute("home")}
         >
-          Home
+          <AiFillHome />
+          {!isShrink && "Home"}
         </li>
         {role === "ADMIN" && (
           <>
             <li
-              className={`px-2 py-4 text-center cursor-pointer ${
-                pathname === "/student-list"
-                  ? "bg-blue-500 text-white rounded-lg"
-                  : ""
-              }`}
+              className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
+      ${pathname === "/student-list" ? "bg-blue-500 text-white rounded-lg" : ""}
+      ${isShrink ? "justify-center" : "justify-start"}
+    `}
               onClick={() => handleRoute("student-list")}
             >
-              Student Lists
+              <FaUserGraduate />
+              {!isShrink && "Student Lists"}
             </li>
             <li
-              className={`px-2 py-4 text-center cursor-pointer ${
-                pathname === "/faculty-list"
-                  ? "bg-blue-500 text-white rounded-lg"
-                  : ""
-              }`}
+              className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
+      ${pathname === "/faculty-list" ? "bg-blue-500 text-white rounded-lg" : ""}
+      ${isShrink ? "justify-center" : "justify-start"}
+    `}
               onClick={() => handleRoute("faculty-list")}
             >
-              Faculty Lists
+              <FaChalkboardTeacher />
+              {!isShrink && "Faculty Lists"}
             </li>
           </>
         )}
 
         {role !== "STUDENT" && (
           <li
-            className={`px-2 py-4 text-center cursor-pointer ${
-              pathname === `/inbox/${id}`
-                ? "bg-blue-500 text-white rounded-lg"
-                : ""
-            }`}
+             className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
+      ${pathname === `/inbox/${id}` ? "bg-blue-500 text-white rounded-lg" : ""}
+      ${isShrink ? "justify-center" : "justify-start"}
+    `}
             onClick={() => handleRoute(`inbox/${id}`)}
           >
-            Inbox
+            <IoMdMail />
+            {!isShrink && "Inbox"}
           </li>
         )}
+        {role !== "ADMIN" && (
+          <li
+              className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
+      ${pathname === `/dashboard/${id}` ? "bg-blue-500 text-white rounded-lg" : ""}
+      ${isShrink ? "justify-center" : "justify-start"}
+    `}
+            onClick={() => handleRoute(`dashboard/${id}`)}
+          >
+            <MdDashboard />
+            {!isShrink && "Dashboard"}
+          </li>
+        )}
+
         <li
-          className={`px-2 py-4 text-center cursor-pointer ${
-            pathname === `/dashboard/${id}` ? "bg-blue-500 text-white rounded-lg" : ""
+          className={`px-2  py-4 text-left cursor-pointer flex justify-start gap-1 items-center ${
+            isShrink ? "justify-center" : ""
           }`}
-          onClick={() => handleRoute(`dashboard/${id}`)}
-        >
-          Dashboard
-        </li>
-        <li
-          className="px-2 py-4 text-center cursor-pointer"
-          onClick={toggleTheme}
-        >
-          Theme
-        </li>
-        <li
-          className="px-2  py-4 text-center cursor-pointer"
           onClick={handleLogout}
         >
-          Logout
+          <FiLogOut />
+          {!isShrink && "Logout"}
         </li>
+        <div className={`flex items-center gap-2 ${isShrink ? "hidden" : ""}`}>
+          <FiSun className="text-xl text-yellow-500" />
+          <button
+            onClick={toggleTheme}
+            className={`relative w-10 h-5 bg-gray-400 dark:bg-gray-600 rounded-full transition duration-300`}
+          >
+            <span
+              className={`absolute top-[2px] left-[2px] w-4 h-4 bg-white rounded-full transition-all duration-300 ${
+                isDark ? "translate-x-5" : "translate-x-0"
+              }`}
+            ></span>
+          </button>
+          <FiMoon className="text-xl text-blue-400" />
+        </div>
+        {isShrink && (
+          <button
+            onClick={toggleTheme}
+            className={` flex justify-start items-center p-1 cursor-pointer ${
+              isShrink ? "justify-center" : ""
+            }`}
+          >
+            {isDark ? <FiSun /> : <FiMoon />}
+          </button>
+        )}
       </ul>
 
       <ul
@@ -113,7 +165,7 @@ const Navbar = () => {
         } `}
       >
         <li
-          className={`px-2 py-4 text-center cursor-pointer ${
+          className={`px-2 py-4 text-left cursor-pointer ${
             pathname === "/home" ? "bg-blue-500 text-white rounded-lg" : ""
           }`}
         >
@@ -122,7 +174,7 @@ const Navbar = () => {
         {role === "ADMIN" && (
           <>
             <li
-              className={`px-2 py-4 text-center cursor-pointer ${
+              className={`px-2 py-4 text-left cursor-pointer ${
                 pathname === "/student-list"
                   ? "bg-blue-500 text-white rounded-lg"
                   : ""
@@ -131,7 +183,7 @@ const Navbar = () => {
               Student Lists
             </li>
             <li
-              className={`px-2 py-4 text-center cursor-pointer ${
+              className={`px-2 py-4 text-left cursor-pointer ${
                 pathname === "/faculty-list"
                   ? "bg-blue-500 text-white rounded-lg"
                   : ""
@@ -143,7 +195,7 @@ const Navbar = () => {
         )}
         {!role === "STUDENT" && (
           <li
-            className={`px-2 py-4 text-center cursor-pointer ${
+            className={`px-2 py-4 text-left cursor-pointer ${
               pathname === "/inbox" ? "bg-blue-500 text-white rounded-lg" : ""
             }`}
           >
@@ -151,20 +203,20 @@ const Navbar = () => {
           </li>
         )}
         <li
-          className={`px-2 py-4 text-center cursor-pointer ${
+          className={`px-2 py-4 text-left cursor-pointer ${
             pathname === "/dashboard" ? "bg-blue-500 text-white rounded-lg" : ""
           }`}
         >
           Dashboard
         </li>
         <li
-          className="px-2 py-4 text-center cursor-pointer"
+          className="px-2 py-4 text-left cursor-pointer"
           onClick={toggleTheme}
         >
           Theme
         </li>
         <li
-          className="px-2  py-4 text-center cursor-pointer"
+          className="px-2  py-4 text-left cursor-pointer"
           onClick={handleLogout}
         >
           Logout

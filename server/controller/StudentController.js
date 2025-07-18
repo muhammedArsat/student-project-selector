@@ -78,9 +78,13 @@ const studentNewProject = async (req, res) => {
       guideId: guide,
       abstract,
     });
+    const guideDetail = await User.findById(guide);
+    console.log(guideDetail)
+  
     console.log(projectDetails);
     projectDetails.totalRegistered += 1;
     await projectDetails.save();
+
     await newRegisteredProject.save();
 
     return res.status(200).json({

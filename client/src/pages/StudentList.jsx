@@ -210,7 +210,7 @@ const searchedData = data.filter((d) =>
         <SearchBar value={search} handleChange={handleSearchChange} />
       </div>
       <div className="w-full">
-        <UserList data={searchedData} user={"student"} col2={"Name"} col3={"Department"} col4={"Email"}/>
+        <UserList data={searchedData} user={"student"} col2={"Name"} col3={"Department"} col4={"Email"} />
       </div>
       <div className="mt-4">
         <Paging/>

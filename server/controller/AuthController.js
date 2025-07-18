@@ -27,6 +27,13 @@ const googleCallback = (req, res) => {
 const getMe = async (req, res) => {
   try {
     const { email, role, id, profile } = req.user;
+    console.log({
+      ok: true,
+      email: email,
+      role: role,
+      id: id,
+      profile: profile,
+    });
     return res.status(200).json({
       ok: true,
       email: email,

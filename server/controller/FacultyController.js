@@ -1,4 +1,5 @@
 const RegisteredProject = require("../model/RegisteredProject");
+const User = require("../model/User");
 
 const getRegisteredProjectById = async (req, res) => {
   try {
@@ -31,6 +32,7 @@ const guideApproval = async (req, res) => {
     const { status } = req.query;
 
     const project = await RegisteredProject.findById(id);
+    const guideDetails =await User.findById(project.guideId);
 
     if (!project) {
       return res.status(400).json({
@@ -41,9 +43,12 @@ const guideApproval = async (req, res) => {
 
     project.guideApproval = status ? "Approved" : "Rejected";
     await project.save();
-
+    if(project.guideApproval === "Approved"){
+      guideDetails.limit += 1;
+      await guideDetails.save()
+    }
     return res.status(200).json({
-      ok: false,
+      ok: true,
       message: `Guide approval Changed to ${project.guideApproval}`,
     });
   } catch (err) {
@@ -111,9 +116,34 @@ const getPendingProjects = async (req, res) => {
   }
 };
 
+const facultyDashboard = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const facultyProject = await RegisteredProject.find({guideId:id, guideApproval:"Approved"})
+      .populate("students")
+      .populate("project")
+      .populate("guideId");
+    if (!facultyProject) {
+      return res.status(200).json({
+        ok: false,
+        facultyProject: [""],
+      });
+    }
+    return res.status(200).json({
+      ok: true,
+      facultyProject: facultyProject,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      ok: false,
+      message: err.message,
+    });
+  }
+};
 module.exports = {
   getRegisteredProjectById,
   guideApproval,
   getAllStudents,
   getPendingProjects,
+  facultyDashboard,
 };

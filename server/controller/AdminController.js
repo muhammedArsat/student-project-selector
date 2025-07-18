@@ -102,6 +102,7 @@ const tacApproval = async (req, res) => {
       message: "Tac Approval Status Changed",
     });
   } catch (err) {
+    console.log(err.message)
     return res.status(500).json({
       ok: false,
       message: err.message,
@@ -153,22 +154,23 @@ const getPendingProjects = async (req, res) => {
     const pendingProjects = await RegisteredProject.find({
       tacApproval: "Initiated",
       guideApproval: "Approved",
-    }).populate('students')
-    .populate("guideId").populate('project');
-
-    console.log("Inside Admin Controller")
-    if(!pendingProjects){
-      return res.status(200).json({
-        ok:false,
-        message:[""]
-      })
-    } 
-    console.log(pendingProjects)
-    return res.status(200).json({
-      ok:true,
-      pendingProjects: pendingProjects
     })
+      .populate("students")
+      .populate("guideId")
+      .populate("project");
 
+    console.log("Inside Admin Controller");
+    if (!pendingProjects) {
+      return res.status(200).json({
+        ok: false,
+        message: [""],
+      });
+    }
+    console.log(pendingProjects);
+    return res.status(200).json({
+      ok: true,
+      pendingProjects: pendingProjects,
+    });
   } catch (err) {
     return res.status(500).json({
       ok: false,
@@ -184,5 +186,5 @@ module.exports = {
   tacApproval,
   getAllRegisteredProject,
   getRegisteredProjectById,
-  getPendingProjects
+  getPendingProjects,
 };

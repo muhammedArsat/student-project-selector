@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const BASEURL = axios.create({
-  baseURL:"http://localhost:3000/api/v1/student",
+  baseURL:`${import.meta.env.VITE_BACKEND_URL}/api/v1/student`,
   withCredentials:true
 })
 export const getSoftwareProjects = async(category)=>{

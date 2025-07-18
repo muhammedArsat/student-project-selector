@@ -285,7 +285,7 @@ const RegisterProject = ({ category, domain, handleSubmit, loading }) => {
               className="font-inter bg-transparent dark:bg-dark-bg"
               key={id}
             >
-              {guide.name}
+              {guide.name} - {guide.userId} - {guide.email}
             </option>
           ))}
         </select>

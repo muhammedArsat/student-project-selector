@@ -1,7 +1,8 @@
+import { meta } from "@eslint/js";
 import axios from "axios";
 
 const BASEURL = axios.create({
-  baseURL:'http://localhost:3000/api/v1/admin',
+  baseURL:`${import.meta.env.VITE_BACKEND_URL}/api/v1/admin`,
   withCredentials:true
 })
 
@@ -18,5 +19,16 @@ export const allStudent = async()=>{
 export const getPendings = async(role,id)=>{
   const res = await BASEURL.get(`/pending`)
   console.log(res.data)
+  return res.data;
+}
+
+export const getFaculty = async()=>{
+  const res = await BASEURL.get('/faculties');
+  console.log(res.data)
+  return res.data
+}
+
+export const updateTacApproval = async(projectId, status)=>{
+  const res = await BASEURL.put(`/projects/${projectId}?status=${status}`);
   return res.data;
 }

@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import { toast } from "react-toastify";
 import AuthContext from "../hooks/AuthContext";
 import { getProjectForDashboard } from "../apis/StudentApis";
+import { facultyDashboard } from "../apis/FacultyApi";
 
 const DashBoard = () => {
   const [data, setData] = useState([]);
@@ -19,11 +20,26 @@ const DashBoard = () => {
     }
   };
 
+  const fetchFacultyDashboard = async () => {
+    try {
+      const res = await facultyDashboard(id);
+      if (res.ok) {
+        setData(res.facultyProject);
+      }
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
+
   useEffect(() => {
     if (role === "STUDENT") {
       fetchStudentDashboard();
+    } else if (role === "FACULTY") {
+      fetchFacultyDashboard();
+    } else {
     }
   }, []);
+
   const [search, setSearch] = useState("");
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -42,24 +58,28 @@ const DashBoard = () => {
       <div className="mb-4">
         <SearchBar value={search} handleChange={handleSearch} />
       </div>
-      {searchedData.map((data, _idx) => (
-        <InboxCard
-          projectId={data.id}
-          projectTitle={data.project.title}
-          projectDomain={data.project.domain}
-          projectCategory={data.project.category}
-          students={data.students}
-          guideId={data.guideId}
-          guideName={data.guideId.name}
-          guideDepartment={data.guideId.department}
-          guideEmail={data.guideId.email}
-          tacApproval={data.tacApproval}
-          guideApproval={data.guideApproval}
-          abstract={data.abstract}
-          currPage={"dashboard"}
-          key={_idx}
-        />
-      ))}
+      {searchedData.length === 0 ? (
+        <p className="text-center font-lexend text-gray-400">Empty</p>
+      ) : (
+        searchedData.map((data, _idx) => (
+          <InboxCard
+            projectId={data.id}
+            projectTitle={data.project.title}
+            projectDomain={data.project.domain}
+            projectCategory={data.project.category}
+            students={data.students}
+            guideId={data.guideId}
+            guideName={data.guideId.name}
+            guideDepartment={data.guideId.department}
+            guideEmail={data.guideId.email}
+            tacApproval={data.tacApproval}
+            guideApproval={data.guideApproval}
+            abstract={data.abstract}
+            currPage={"dashboard"}
+            key={_idx}
+          />
+        ))
+      )}
     </div>
   );
 };

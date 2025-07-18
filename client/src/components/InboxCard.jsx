@@ -28,7 +28,7 @@ const InboxCard = ({
     <div className="w-full  rounded-lg shadow-soft dark:shadow-darkSoft p-2 dark:bg-dark-bg mb-3 transition-colors duration-500">
       {/* top card */}
       <div className="flex flex-col mb-1">
-        <div className="grid grid-cols-2 sm:flex sm:justify-between sm:items-center gap-3 border-b dark:border-b-gray-500 mb-2 pb-3">
+        <div className="grid grid-cols-2 lg:flex lg:justify-between lg:items-center gap-3 border-b dark:border-b-gray-500 mb-2 pb-3">
           <div>
             <h1 className="font-lexend text-body">{projectTitle}</h1>
             <p className="font-inter text-body text-gray-400">
@@ -42,8 +42,12 @@ const InboxCard = ({
             </p>
           </div>
           <div>
-            <h1 className="font-lexend text-body">Guide</h1>
+            <h1 className="font-lexend text-body">Guide </h1>
             <p className="font-inter text-body text-gray-400">{guideName}</p>
+          </div>
+          <div className="break-words">
+            <h1 className="font-lexend text-body">Guide Email</h1>
+            <p className="font-inter text-body text-gray-400 ">{guideEmail}</p>
           </div>
           <div className={`${currPage === "dashboard" ? "block" : "hidden"}`}>
             <h1 className="font-lexend text-body">Guide Status</h1>
@@ -73,20 +77,24 @@ const InboxCard = ({
           >
             <button
               className="p-2 bg-green-400 rounded-lg active:bg-green-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
-              onClick={() =>
+              onClick={() => {
+                console.log("here");
+                console.log(projectId)
                 role === "FACULTY"
-                  ? updateByFaculty(projectId,true)
-                  : updateByAdmin(projectId,true)
-              }
+                  ? updateByFaculty(projectId, true)
+                  : updateByAdmin(projectId, true);
+              }}
             >
               Approve
             </button>
-            <button className="p-2 bg-red-400 rounded-lg active:bg-red-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
+            <button
+              className="p-2 bg-red-400 rounded-lg active:bg-red-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
               onClick={() =>
                 role === "FACULTY"
-                  ? updateByFaculty(projectId,false)
-                  : updateByAdmin(projectId,false)
-              }>
+                  ? updateByFaculty(projectId, false)
+                  : updateByAdmin(projectId, false)
+              }
+            >
               Reject
             </button>
           </div>
@@ -116,7 +124,7 @@ const InboxCard = ({
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${
           isBottomCardOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
-        } grid grid-cols-1 sm:flex sm:flex-row sm:justify-between sm:items-start `}
+        } grid grid-cols-1 lg:flex lg:flex-row lg:justify-between lg:items-start `}
       >
         <div>
           <h1 className="font-lexend text-body ">Student Details</h1>

@@ -3,7 +3,7 @@ import InboxCard from "../components/InboxCard";
 import SearchBar from "../components/SearchBar";
 import Paging from "../components/Paging";
 import AuthContext from "../hooks/AuthContext";
-import { getPendings } from "../apis/AdminApis";
+import { getPendings, updateTacApproval } from "../apis/AdminApis";
 import { toast } from "react-toastify";
 import { facultyApproval, getFacultyPending } from "../apis/FacultyApi";
 const Inbox = () => {
@@ -29,6 +29,7 @@ const Inbox = () => {
   const fetchFacultyPending = async () => {
     try {
       const res = await getFacultyPending(id);
+
       if (res.ok) {
         setData(res.pendingProjects);
       }
@@ -40,14 +41,29 @@ const Inbox = () => {
   const updateByFaculty = async (id, status) => {
     try {
       const res = await facultyApproval(id, status);
+      console.log("success");
       if (res.ok) {
         toast.success("Updated success✅");
+        console.log(id);
+        setData((prevData) => prevData.filter((d) => d._id !== id));
       }
     } catch (error) {
       toast.error("Something went wrong");
     }
   };
-  const updateByAdmin = async (id, status) => {};
+  const updateByAdmin = async (id, status) => {
+    try {
+      console.log(id);
+      const res = await updateTacApproval(id, status);
+      if (res.ok) {
+        toast.success("Updated Successfully");
+        setData((prev) => prev.filter((d) => d._id !== id));
+      }
+    } catch (err) {
+      console.log(err.message);
+      toast.error("Something went wrong");
+    }
+  };
   useEffect(() => {
     if (role === "ADMIN") {
       fetchPendings();
@@ -78,7 +94,7 @@ const Inbox = () => {
       </div>
       <div className="overflow-auto h-[440px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent p-2">
         {searchedData.length === 0 ? (
-          <p className="text-center font-lexend text-gray-400">No Match</p>
+          <p className="text-center font-lexend text-gray-400">Empty</p>
         ) : (
           searchedData.map((data, _idx) => (
             <InboxCard
@@ -103,7 +119,8 @@ const Inbox = () => {
           ))
         )}
       </div>
-      <Paging />
+
+      {searchedData.length > 1  && <Paging />}
     </div>
   );
 };

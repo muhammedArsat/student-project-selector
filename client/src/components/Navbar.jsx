@@ -216,7 +216,7 @@ const Navbar = () => {
                ? "bg-blue-500 text-white rounded-lg"
                : ""
            }
-           ${isShrink ? "justify-center" : "justify-start"}
+           
     `}
             onClick={() => handleRoute(`inbox/${id}`)}
           >

@@ -27,6 +27,9 @@ const UserList = ({ data, profile, col2, col3, col4, user }) => {
                 key={_idx}
                 className="border-b dark:border-b-gray-600 hover:bg-gray-50 dark:hover:bg-[#2c3136] cursor-pointer"
               >
+                <td>
+                  {_idx+1}
+                </td>
                 <td className="p-4">
                   <div className="flex items-center gap-3 flex-wrap sm:flex-nowrap">
                     <img

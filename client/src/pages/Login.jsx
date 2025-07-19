@@ -11,7 +11,7 @@ const Login = () => {
   };
   return (
     <div className="flex justify-center items-center min-h-screen p-3">
-      <div className="sm:w-1/4  rounded-lg flex flex-col justify-evenly items-center gap-4 p-4 shadow-card min-h-[80vh]">
+      <div className="sm:w-1/4  rounded-lg flex flex-col justify-evenly items-center gap-4 p-4 shadow-card sm:min-h-[80vh]">
         <h1 className="w-full font-lexend text-heading text-center">
           Welcome Back!
         </h1>

@@ -146,7 +146,7 @@ const Navbar = () => {
             className={`relative w-10 h-5 bg-gray-400 dark:bg-gray-600 rounded-full transition duration-300`}
           >
             <span
-              className={`absolute bg-blue-white sm:top-[2px] left-[2px] w-4 h-4 rounded-full transition-all duration-300 shadow-md ${
+              className={`absolute bg-white sm:top-[2px] left-[2px] w-4 h-4 rounded-full transition-all duration-300 shadow-md ${
                 isDark ? "translate-x-5" : "translate-x-0"
               }`}
             ></span>

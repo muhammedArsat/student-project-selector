@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import Loader from "./Loader";
 const InboxCard = ({
   projectId,
   projectTitle,
@@ -17,10 +18,12 @@ const InboxCard = ({
   role,
   updateByAdmin,
   updateByFaculty,
+  loading,
 }) => {
   const [isBottomCardOpen, setIsBottomCardOpen] = useState(() => {
     return currPage === "dashboard";
   });
+
   const handleBottomCard = () => {
     setIsBottomCardOpen((prev) => !prev);
   };
@@ -79,13 +82,14 @@ const InboxCard = ({
               className="p-2 bg-green-400 rounded-lg active:bg-green-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
               onClick={() => {
                 console.log("here");
-                console.log(projectId)
+                console.log(projectId);
                 role === "FACULTY"
                   ? updateByFaculty(projectId, true)
                   : updateByAdmin(projectId, true);
               }}
+              disabled={loading}
             >
-              Approve
+              {loading ? <Loader /> : "Approve"}
             </button>
             <button
               className="p-2 bg-red-400 rounded-lg active:bg-red-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
@@ -94,8 +98,9 @@ const InboxCard = ({
                   ? updateByFaculty(projectId, false)
                   : updateByAdmin(projectId, false)
               }
+              disabled={loading}
             >
-              Reject
+              {loading ? <Loader /> : "Reject"}
             </button>
           </div>
         </div>

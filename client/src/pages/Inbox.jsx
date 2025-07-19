@@ -46,8 +46,9 @@ const Inbox = () => {
 
   const updateByFaculty = async (id, status) => {
     try {
+      setLoading(true)
       const res = await facultyApproval(id, status);
-      console.log("success");
+
       if (res.ok) {
         toast.success("Updated success✅");
         console.log(id);
@@ -55,10 +56,13 @@ const Inbox = () => {
       }
     } catch (error) {
       toast.error("Something went wrong");
+    }finally{
+      setLoading(false)
     }
   };
   const updateByAdmin = async (id, status) => {
     try {
+      setLoading(true)
       const res = await updateTacApproval(id, status);
       if (res.ok) {
         toast.success("Updated Successfully");
@@ -67,6 +71,8 @@ const Inbox = () => {
     } catch (err) {
       console.log(err.message);
       toast.error("Something went wrong");
+    }finally{
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -127,6 +133,7 @@ const Inbox = () => {
               role={role}
               updateByAdmin={updateByAdmin}
               updateByFaculty={updateByFaculty}
+              loading={loading}
             />
           ))
         )}

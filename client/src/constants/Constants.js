@@ -28,7 +28,7 @@ export const hardwareDomains = [
 ];
 
 export const loginIntro =
-  "Discover exciting project opportunities, collaborate with mentors, and take the first step toward innovation and success at BIT.";
+  "BIT Project selection portal";
 
 export const adminNewSoftwarePage =
   "Admins can add new software projects to the system. Provide all required details including title, domain, and selection limits. These projects will be made available for students to explore and select.";

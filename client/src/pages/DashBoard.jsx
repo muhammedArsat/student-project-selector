@@ -58,20 +58,23 @@ const DashBoard = () => {
     d.students[0].name.toLowerCase().includes(search.toLowerCase())
   );
 
-  if(loading){
+  if (loading) {
     return (
       <div className="w-full flex justify-center items-center min-h-[80vh]">
-        <Loader/>
+        <Loader />
       </div>
-    )
+    );
   }
   return (
     <div className="p-2 sm:p-2 h-[630px] overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent">
       <h1 className="font-lexend text-subheading">Dashboard</h1>
       <p className="font-inter text-body mb-4 text-gray-400">{dashboard}</p>
-      <div className="mb-4">
-        <SearchBar value={search} handleChange={handleSearch} />
-      </div>
+      {role !== "STUDENT" && (
+        <div className="mb-4">
+          <SearchBar value={search} handleChange={handleSearch} />
+        </div>
+      )}
+
       {searchedData.length === 0 ? (
         <p className="text-center font-lexend text-gray-400">Empty</p>
       ) : (

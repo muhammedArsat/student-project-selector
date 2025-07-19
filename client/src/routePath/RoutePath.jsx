@@ -19,11 +19,12 @@ const RoutePath = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+
         <Route element={<SideBarLayout />}>
           <Route
             path="/home"
             element={
-              <ProtectedRoute allowedRole={["STUDENT", "ADMIN","FACULTY"]}>
+              <ProtectedRoute allowedRole={["STUDENT", "ADMIN", "FACULTY"]}>
                 <Home />
               </ProtectedRoute>
             }
@@ -70,28 +71,28 @@ const RoutePath = () => {
           />
 
           <Route
-          path="/dashboard/:id"
-          element={
-            <ProtectedRoute allowedRole={["ADMIN","FACULTY","STUDENT"]}>
-              <DashBoard/>
-            </ProtectedRoute>
-          }
-          />
-             <Route
-          path="/register-software"
-          element={
-            <ProtectedRoute allowedRole={["ADMIN","FACULTY","STUDENT"]}>
-              <NewSoftwareRegister/>
-            </ProtectedRoute>
-          }
+            path="/dashboard/:id"
+            element={
+              <ProtectedRoute allowedRole={["ADMIN", "FACULTY", "STUDENT"]}>
+                <DashBoard />
+              </ProtectedRoute>
+            }
           />
           <Route
-          path="/register-hardware"
-          element={
-            <ProtectedRoute allowedRole={["ADMIN","FACULTY","STUDENT"]}>
-              <NewHardwareRegister/>
-            </ProtectedRoute>
-          }
+            path="/register-software"
+            element={
+              <ProtectedRoute allowedRole={["ADMIN", "FACULTY", "STUDENT"]}>
+                <NewSoftwareRegister />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/register-hardware"
+            element={
+              <ProtectedRoute allowedRole={["ADMIN", "FACULTY", "STUDENT"]}>
+                <NewHardwareRegister />
+              </ProtectedRoute>
+            }
           />
         </Route>
 

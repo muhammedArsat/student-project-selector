@@ -10,26 +10,36 @@ const NewHardwareRegister = () => {
     try {
       setLoading(true);
       const res = await newProjectRegister(formData);
+
       if (res.ok === true) {
         toast.success("Registered successfully");
         setFormData({
-          students: [""], // Starts with 1 student
+          students: [""],
           type: "",
           project: "",
           guide: "",
           category: "Hardware",
-          domain: domain || "",
+          domain: "",
           abstract: "",
         });
-      } else if (res.ok === "clientError") {
-        toast.warning("Add unregistered student ");
+        return; // stop further execution
       }
+
+      if (res.ok === "clientError") {
+        toast.warning("Add unregistered student");
+        return;
+      }
+
+      // If res.ok is false or any other unexpected value
+      toast.error("Something went wrong. Please try again.");
     } catch (err) {
-      toast.error("Something went wrong");
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="overflow-auto h-[600px] p-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500 ">
       <h1 className="font-lexend text-subheading">New Hardware Project</h1>

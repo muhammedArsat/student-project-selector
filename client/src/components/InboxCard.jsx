@@ -81,32 +81,47 @@ const InboxCard = ({
             <button
               className="p-2 bg-green-400 rounded-lg active:bg-green-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
               onClick={() => {
-                console.log("here");
-                console.log(projectId);
+                setLoadingButton("approve");
                 role === "FACULTY"
-                  ? updateByFaculty(projectId, true)
-                  : updateByAdmin(projectId, true);
+                  ? updateByFaculty(projectId, true).finally(() =>
+                      setLoadingButton(null)
+                    )
+                  : updateByAdmin(projectId, true).finally(() =>
+                      setLoadingButton(null)
+                    );
               }}
-              disabled={loading}
+              disabled={loadingButton !== null}
             >
-              {loading ? (
-                <div>
+              {loadingButton === "approve" ? (
+                <div className="flex justify-center items-center w-[70px] h-[24px]">
                   <Loader />
                 </div>
               ) : (
                 "Approve"
               )}
             </button>
+
             <button
               className="p-2 bg-red-400 rounded-lg active:bg-red-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
-              onClick={() =>
+              onClick={() => {
+                setLoadingButton("reject");
                 role === "FACULTY"
-                  ? updateByFaculty(projectId, false)
-                  : updateByAdmin(projectId, false)
-              }
-              disabled={loading}
+                  ? updateByFaculty(projectId, false).finally(() =>
+                      setLoadingButton(null)
+                    )
+                  : updateByAdmin(projectId, false).finally(() =>
+                      setLoadingButton(null)
+                    );
+              }}
+              disabled={loadingButton !== null}
             >
-              {loading ? <Loader /> : "Reject"}
+              {loadingButton === "reject" ? (
+                <div className="flex justify-center items-center w-[70px] h-[24px]">
+                  <Loader />
+                </div>
+              ) : (
+                "Reject"
+              )}
             </button>
           </div>
         </div>

@@ -10,17 +10,19 @@ const NewHardwareRegister = () => {
     try {
       setLoading(true);
       const res = await newProjectRegister(formData);
-      if (res.ok) {
+      if (res.ok === true) {
         toast.success("Registered successfully");
         setFormData({
           students: [""], // Starts with 1 student
           type: "",
           project: "",
           guide: "",
-          category: "Software",
+          category: "Hardware",
           domain: domain || "",
           abstract: "",
         });
+      } else if (res.ok === "clientError") {
+        toast.warning("Add unregistered student ");
       }
     } catch (err) {
       toast.error("Something went wrong");

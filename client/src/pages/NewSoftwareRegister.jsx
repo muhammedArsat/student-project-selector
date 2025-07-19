@@ -11,7 +11,7 @@ const NewSoftwareRegister = () => {
       setLoading(true);
       const res = await newProjectRegister(formData);
       if (res.ok === true) {
-        toast.success("Project registered ");
+        toast.success("Project registered");
         setFormData({
           students: [""], // Starts with 1 student
           type: "",
@@ -22,10 +22,10 @@ const NewSoftwareRegister = () => {
           abstract: "",
         });
       } else if (res.ok === "clientError") {
-        toast.warning("Add unregistered student ❌");
+        toast.warning("Add unregistered student");
       }
     } catch (err) {
-      toast.error("Something went wrong ❌");
+      toast.error("Something went wrong ");
     } finally {
       setLoading(false);
     }

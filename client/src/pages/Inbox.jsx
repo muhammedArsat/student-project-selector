@@ -25,7 +25,7 @@ const Inbox = () => {
       }
     } catch (err) {
       console.log(err);
-      toast.error("Something went wrong ❌");
+      toast.error("Something went wrong ");
     } finally {
       setLoading(false);
     }
@@ -52,7 +52,7 @@ const Inbox = () => {
       const res = await facultyApproval(id, status);
 
       if (res.ok) {
-        toast.success("Updated success✅");
+        toast.success("Updated success");
         console.log(id);
         setData((prevData) => prevData.filter((d) => d._id !== id));
       }

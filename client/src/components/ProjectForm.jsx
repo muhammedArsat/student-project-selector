@@ -139,7 +139,15 @@ const ProjectForm = ({
       </div>
       <div className="flex sm:justify-end w-full ">
         <Button type={"submit"}>
-          <span className="w-full">{loading ? <Loader /> : "Create Project"}</span>
+          <span className="w-full bg-green-500">
+            {loading ? (
+              <div className="flex justify-center items-center w-full"> 
+                <Loader />
+              </div>
+            ) : (
+              "Create Project"
+            )}
+          </span>
         </Button>
       </div>
     </form>

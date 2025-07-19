@@ -3,14 +3,24 @@ import RegisterProject from "../components/RegisterProject";
 import { TbWashDryP } from "react-icons/tb";
 import { toast } from "react-toastify";
 import { hardwareProjectadd } from "../constants/Constants";
+import { newProjectRegister } from "../apis/StudentApis";
 const NewHardwareRegister = () => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (formData, setFormData) => {
     try {
       setLoading(true);
-      const res = await hanldeSubmitHardwate(formData);
+      const res = await newProjectRegister(formData);
       if (res.ok) {
         toast.success("Registered successfully");
+        setFormData({
+          students: [""], // Starts with 1 student
+          type: "",
+          project: "",
+          guide: "",
+          category: "Software",
+          domain: domain || "",
+          abstract: "",
+        });
       }
     } catch (err) {
       toast.error("Something went wrong");

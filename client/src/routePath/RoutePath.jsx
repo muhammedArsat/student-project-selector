@@ -14,6 +14,7 @@ import Inbox from "../pages/Inbox";
 import DashBoard from "../pages/DashBoard";
 import NewSoftwareRegister from "../pages/NewSoftwareRegister";
 import NewHardwareRegister from "../pages/NewHardwareRegister";
+
 const RoutePath = () => {
   return (
     <Router>
@@ -64,7 +65,7 @@ const RoutePath = () => {
           <Route
             path="/inbox/:id"
             element={
-              <ProtectedRoute allowedRole={["FACULTY", "ADMIN"]}>
+              <ProtectedRoute allowedRole={["ADMIN", "FACULTY"]}>
                 <Inbox />
               </ProtectedRoute>
             }

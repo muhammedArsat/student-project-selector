@@ -89,7 +89,13 @@ const InboxCard = ({
               }}
               disabled={loading}
             >
-              {loading ? <Loader /> : "Approve"}
+              {loading ? (
+                <div>
+                  <Loader />
+                </div>
+              ) : (
+                "Approve"
+              )}
             </button>
             <button
               className="p-2 bg-red-400 rounded-lg active:bg-red-500 transition-all duration-300 hover:cursor-pointer text-white font-lexend text-body"
@@ -182,7 +188,7 @@ const InboxCard = ({
           </span>
           <span className="flex flex-col sm:flex-row ">
             <h1 className="font-inter text-body w-[100px] ">Abstract:</h1>
-            <p className="font-inter text-body text-gray-500 max-w-[200px] sm:max-w-[350px] dark:text-gray-400">
+            <p className="font-inter text-body text-gray-500 w-full sm:max-w-[350px] dark:text-gray-400">
               {abstract}
             </p>
           </span>

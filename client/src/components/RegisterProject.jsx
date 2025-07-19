@@ -337,8 +337,16 @@ const RegisterProject = ({ category, domain, handleSubmit, loading }) => {
 
       {/* submit button */}
       <div className="flex justify-end items-center">
-        <Button type={"submit"}>
-          <span className="w-full">{loading ? <Loader /> : "Submit Project"}</span>
+        <Button type={"submit"} >
+          <span className="w-full">
+            {loading ? (
+              <div className="flex justify-center items-center"> 
+                <Loader />
+              </div>
+            ) : (
+              "Submit Project"
+            )}
+          </span>
         </Button>
       </div>
     </form>

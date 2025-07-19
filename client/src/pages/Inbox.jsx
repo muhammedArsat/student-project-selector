@@ -13,10 +13,12 @@ const Inbox = () => {
   console.log(role);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [buttonLoad, setButtonLoad] = useState(false)
   
   const fetchPendings = async () => {
     try {
       setLoading(true);
+      
       const res = await getPendings(role, id);
       if (res.ok) {
         setData(res.pendingProjects);
@@ -46,7 +48,7 @@ const Inbox = () => {
 
   const updateByFaculty = async (id, status) => {
     try {
-      setLoading(true)
+      setButtonLoad(true)
       const res = await facultyApproval(id, status);
 
       if (res.ok) {
@@ -57,7 +59,7 @@ const Inbox = () => {
     } catch (error) {
       toast.error("Something went wrong");
     }finally{
-      setLoading(false)
+      setButtonLoad(false)
     }
   };
   const updateByAdmin = async (id, status) => {
@@ -133,7 +135,7 @@ const Inbox = () => {
               role={role}
               updateByAdmin={updateByAdmin}
               updateByFaculty={updateByFaculty}
-              loading={loading}
+              loading={buttonLoad}
             />
           ))
         )}

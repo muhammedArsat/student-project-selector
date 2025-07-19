@@ -6,6 +6,7 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const handleLogin = () => {
+    console.log(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`)
     window.open(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, "_self");
   };
   return (

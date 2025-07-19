@@ -20,6 +20,8 @@ const InboxCard = ({
   updateByFaculty,
   loading,
 }) => {
+
+  const[loadingButton, setLoadingButton ] = useState(null)
   const [isBottomCardOpen, setIsBottomCardOpen] = useState(() => {
     return currPage === "dashboard";
   });

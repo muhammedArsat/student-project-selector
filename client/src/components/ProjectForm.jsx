@@ -139,7 +139,7 @@ const ProjectForm = ({
       </div>
       <div className="flex sm:justify-end w-full ">
         <Button type={"submit"}>
-          <span>{loading ? <Loader /> : "Create Project"}</span>
+          <span className="w-full">{loading ? <Loader /> : "Create Project"}</span>
         </Button>
       </div>
     </form>

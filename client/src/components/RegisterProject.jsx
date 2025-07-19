@@ -338,7 +338,7 @@ const RegisterProject = ({ category, domain, handleSubmit, loading }) => {
       {/* submit button */}
       <div className="flex justify-end items-center">
         <Button type={"submit"}>
-          <span>{loading ? <Loader /> : "Submit Project"}</span>
+          <span className="w-full">{loading ? <Loader /> : "Submit Project"}</span>
         </Button>
       </div>
     </form>

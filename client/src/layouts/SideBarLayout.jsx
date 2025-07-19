@@ -12,7 +12,7 @@ const SideBarLayout = () => {
 
       {/* Main content layout */}
 
-      <main className=" sm:mt-10 sm:ml-10 w-full sm:w-[80%]  ">
+      <main className=" sm:mt-10 sm:ml-10 w-full sm:w-[90%] pr-2  ">
         <Outlet />
       </main>
     </div>

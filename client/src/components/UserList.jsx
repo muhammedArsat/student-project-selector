@@ -42,7 +42,7 @@ const UserList = ({ data, profile, col2, col3, col4, user }) => {
                 </td>
 
                 <td className="p-4">{data.department}</td>
-                <td className="p-4">{data.email}</td>
+                <td className="p-4 break-words">{data.email}</td>
                 <td className="p-4">
                   {user === "student" ? (
                     <span

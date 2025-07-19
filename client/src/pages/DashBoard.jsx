@@ -1,33 +1,42 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import InboxCard from "../components/InboxCard";
 import SearchBar from "../components/SearchBar";
 import { toast } from "react-toastify";
 import AuthContext from "../hooks/AuthContext";
 import { getProjectForDashboard } from "../apis/StudentApis";
 import { facultyDashboard } from "../apis/FacultyApi";
+import { dashboard } from "../constants/Constants";
+import Loader from "../components/Loader";
 
 const DashBoard = () => {
   const [data, setData] = useState([]);
   const { role, id } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const fetchStudentDashboard = async () => {
     try {
+      setLoading(true);
       const res = await getProjectForDashboard(id);
       if (res.ok) {
         setData(res.project);
       }
     } catch (err) {
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
   const fetchFacultyDashboard = async () => {
     try {
+      setLoading(true);
       const res = await facultyDashboard(id);
       if (res.ok) {
         setData(res.facultyProject);
       }
     } catch (err) {
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,13 +57,18 @@ const DashBoard = () => {
   const searchedData = data.filter((d) =>
     d.students[0].name.toLowerCase().includes(search.toLowerCase())
   );
+
+  if(loading){
+    return (
+      <div className="w-full flex justify-center items-center min-h-[80vh]">
+        <Loader/>
+      </div>
+    )
+  }
   return (
     <div className="p-2 sm:p-2 h-[630px] overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent">
       <h1 className="font-lexend text-subheading">Dashboard</h1>
-      <p className="font-inter text-body mb-4 text-gray-400">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit quia
-        expedita provident natus voluptas blanditiis?
-      </p>
+      <p className="font-inter text-body mb-4 text-gray-400">{dashboard}</p>
       <div className="mb-4">
         <SearchBar value={search} handleChange={handleSearch} />
       </div>

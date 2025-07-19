@@ -6,11 +6,14 @@ import AuthContext from "../hooks/AuthContext";
 import { getPendings, updateTacApproval } from "../apis/AdminApis";
 import { toast } from "react-toastify";
 import { facultyApproval, getFacultyPending } from "../apis/FacultyApi";
+import { inboxPage } from "../constants/Constants";
+import Loader from "../components/Loader";
 const Inbox = () => {
   const { role, id } = useContext(AuthContext);
   console.log(role);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   const fetchPendings = async () => {
     try {
       setLoading(true);
@@ -28,6 +31,7 @@ const Inbox = () => {
 
   const fetchFacultyPending = async () => {
     try {
+      setLoading(true);
       const res = await getFacultyPending(id);
 
       if (res.ok) {
@@ -35,6 +39,8 @@ const Inbox = () => {
       }
     } catch (err) {
       toast.error("Something went wrong");
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -53,7 +59,6 @@ const Inbox = () => {
   };
   const updateByAdmin = async (id, status) => {
     try {
-      console.log(id);
       const res = await updateTacApproval(id, status);
       if (res.ok) {
         toast.success("Updated Successfully");
@@ -74,6 +79,8 @@ const Inbox = () => {
     }
   }, []);
 
+  
+
   const [search, setSearch] = useState("");
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -82,13 +89,18 @@ const Inbox = () => {
   const searchedData = data.filter((d) =>
     d.students[0].name.toLowerCase().includes(search.toLowerCase())
   );
+
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center items-center min-h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="p-2 sm:p-0">
       <h1 className="font-lexend text-subheading">Inbox</h1>
-      <p className="font-inter text-body text-gray-400 mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, eius
-        blanditiis ut perferendis corrupti libero.
-      </p>
+      <p className="font-inter text-body text-gray-400 mb-4">{inboxPage}</p>
       <div className="mb-4">
         <SearchBar value={search} handleChange={handleSearch} />
       </div>
@@ -120,7 +132,7 @@ const Inbox = () => {
         )}
       </div>
 
-      {searchedData.length > 1  && <Paging />}
+      {searchedData.length > 1 && <Paging />}
     </div>
   );
 };

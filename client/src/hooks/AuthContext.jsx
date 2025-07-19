@@ -16,7 +16,6 @@ const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await fetchGetMe();
-     
       setAuth({
         email: res.email,
         role: res.role,

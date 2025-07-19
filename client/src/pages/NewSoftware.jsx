@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProjectForm from "../components/ProjectForm";
 import { toast } from "react-toastify";
 import { addNewProject } from "../apis/AdminApis";
+import {adminNewSoftwarePage} from '../constants/Constants'
 const NewSoftware = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -36,8 +37,7 @@ const NewSoftware = () => {
     <div className="p-2 sm:p-0">
       <h1 className="font-lexend text-subheading">Add Software Project</h1>
       <p className="font-inter text-body mb-4 text-gray-400">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-        architecto maxime tempora sit.
+        {adminNewSoftwarePage}
       </p>
       <ProjectForm
         category={"Software"}

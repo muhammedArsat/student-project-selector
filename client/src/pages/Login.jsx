@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Logo from "/BITLOGO.png";
+import {loginIntro} from '../constants/Constants'
 const Login = () => {
   const [error, setError] = useState("");
 
@@ -15,9 +16,8 @@ const Login = () => {
           Welcome Back!
         </h1>
         <img src={Logo} alt="Bit Logo" className="w-[200px]" />
-        <h1 className="font-inter text-body">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id nobis ad
-          in odio neque nihil magnam vitae nemo, sequi hic!
+        <h1 className="font-inter text-body text-center">
+          {loginIntro}
         </h1>
         <button
           onClick={handleLogin}

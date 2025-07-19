@@ -48,5 +48,7 @@ export const inboxPage =
 export const softwareProjectadd =
   "Submit details to officially register your software project.Select team members, type, guide, and provide the project abstract and domain clearly.";
 
+export const hardwareProjectadd = "Submit details to officially register your Hardware project.Select team members, type, guide, and provide the project abstract and domain clearly"
+
 export const dashboard =
   "Get a quick overview of student registrations, project submissions, approvals, and recent updates in one place.";

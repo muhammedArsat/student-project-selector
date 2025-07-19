@@ -114,7 +114,7 @@ const RegisterProject = ({ category, domain, handleSubmit, loading }) => {
   };
   const handleRegister = (e) => {
     e.preventDefault();
-    handleSubmit(formData);
+    handleSubmit(formData,setFormData);
   };
   return (
     <form className="flex flex-col gap-3  " onSubmit={handleRegister}>
@@ -338,7 +338,7 @@ const RegisterProject = ({ category, domain, handleSubmit, loading }) => {
       {/* submit button */}
       <div className="flex justify-end items-center">
         <Button type={"submit"} >
-          <span className="w-full bg-green-500">
+          <span className="w-full ">
             {loading ? (
               <div className="flex justify-center items-center w-full"> 
                 <Loader />

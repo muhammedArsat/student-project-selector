@@ -27,18 +27,21 @@ const UserList = ({ data, profile, col2, col3, col4, user }) => {
                 key={_idx}
                 className="border-b dark:border-b-gray-600 hover:bg-gray-50 dark:hover:bg-[#2c3136] cursor-pointer"
               >
-                <td className="p-4">{_idx + 1}</td>
-                <td className="p-4 flex items-center gap-3">
-                  <img
-                    src={data.profile ? data.profile : DefaultProfile}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = DefaultProfile;
-                    }}
-                    alt={`profile ${_idx + 1}`}
-                    className="rounded-full w-[40px] h-[40px] object-cover"
-                  />
-                  <span>{data.name}</span>
+                <td className="p-4">
+                  <div className="flex items-center gap-3 flex-wrap sm:flex-nowrap">
+                    <img
+                      src={data.profile ? data.profile : DefaultProfile}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = DefaultProfile;
+                      }}
+                      alt={`profile ${_idx + 1}`}
+                      className="rounded-full w-[40px] h-[40px] object-cover shrink-0"
+                    />
+                    <span className="break-words max-w-[120px] sm:max-w-none">
+                      {data.name}
+                    </span>
+                  </div>
                 </td>
 
                 <td className="p-4">{data.department}</td>

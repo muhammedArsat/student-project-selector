@@ -208,7 +208,7 @@ const Navbar = () => {
             </li>
           </>
         )}
-        {!role === "STUDENT" && (
+        {role !== "STUDENT" && (
           <li
             className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
            ${
@@ -224,8 +224,9 @@ const Navbar = () => {
             {"Inbox"}
           </li>
         )}
-        <li
-          className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
+        {role !== "ADMIN" && (
+          <li
+            className={`px-2 py-4 text-left cursor-pointer flex items-center gap-1
       ${
         pathname === `/dashboard/${id}`
           ? "bg-blue-500 text-white rounded-lg"
@@ -233,11 +234,12 @@ const Navbar = () => {
       }
    
     `}
-          onClick={() => handleRoute(`dashboard/${id}`)}
-        >
-          <MdDashboard />
-          {"Dashboard"}
-        </li>
+            onClick={() => handleRoute(`dashboard/${id}`)}
+          >
+            <MdDashboard />
+            {"Dashboard"}
+          </li>
+        )}
 
         <li
           className={`px-2  py-4 text-left cursor-pointer flex justify-start gap-1 items-center `}

@@ -20,7 +20,6 @@ const RoutePath = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-
         <Route element={<SideBarLayout />}>
           <Route
             path="/home"

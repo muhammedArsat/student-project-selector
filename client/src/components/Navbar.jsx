@@ -164,7 +164,7 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`fixed left-0 top-14 font-lexend text-body min-h-screen p-2 rounded-r-lg shadow-soft z-50 bg-white dark:bg-[#181818] transform dark:shadow-darkSoft transition-all duration-500 ease-in-out sm:hidden w-[250px]  flex flex-col justify-between ${
+        className={`fixed left-0 top-14 font-lexend text-body min-h-screen p-2 rounded-r-lg shadow-soft z-50 bg-white dark:bg-[#181818] transform dark:shadow-darkSoft transition-all duration-500 ease-in-out sm:hidden w-[250px]  flex flex-col  ${
           isMobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -246,7 +246,7 @@ const Navbar = () => {
 
         {/* Bottom section */}
        
-          <div className="mb-14 pt-4">
+          <div className=" pt-4">
             <LogoutSection />
             <Theme />
           </div>

@@ -15,7 +15,7 @@ const LogoutSection = () => {
         className="rounded-full w-[40px] h-[40px] object-cover shrink-0"
       
       />
-      <p className="font-lexend break-words w-[175px]">{email || "user@gmail.com"}</p>
+      <p className="font-lexend break-words w-[175px] truncate">{email || "user@gmail.com"}</p>
     </div>
   );
 };
